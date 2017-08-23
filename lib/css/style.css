@@ -13,6 +13,11 @@
 	text-shadow: 0px 1px 3px black;
 }
 
+.txtGray
+{
+	color : lightgray ;
+}
+
 .fondRed
 {
 	background-color : red;
@@ -41,6 +46,11 @@
 .paddingTop
 {
 	padding-top : 64px;
+}
+
+.marginBottom-32
+{
+	margin-bottom : 32px;
 }
 
 textarea 

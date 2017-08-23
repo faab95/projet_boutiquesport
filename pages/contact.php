@@ -3,9 +3,10 @@ if(isset($_POST['formcontact']))
 {
 	$nom = $_POST['name'];
 	$adresse = $_POST['mail'];
+	$sujet = $_POST['sujet'];
 
 	//=====Déclaration de l'adresse de destination.
-	$mail = 'fabian.collier@outlook.be'; 
+	$mail = 'fabian.collier0@gmail.com'; 
 	//=====
 
 	//=====Création du header de l'e-mail.
@@ -15,20 +16,16 @@ if(isset($_POST['formcontact']))
 	$headers .='Content-Transfer-Encoding: 8bit';
 	//=====
 
-	//=====Définition du sujet.
-	$sujet = "Test boutique de sport";
-	//=====
-
 	//=====Création du message.
 	$message = $_POST['message'];
 	//=====
 
 	//=====Envoi de l'e-mail.
-	mail($mail,$sujet,$message,$headers);
+	$verif = mail($mail,$sujet,$message,$headers);
 	//=====
 	
 	//=====Test de réussite de l'envoi.
-	if(mail($mail,$sujet,$message,$headers))
+	if($verif == true)
 	{
 		?>
 		<script type="text/javascript">
@@ -67,15 +64,22 @@ if(isset($_POST['formcontact']))
 			</div>
 			<div class="w3-col m6">
 				<form method="POST">
-					<div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+					<select class="w3-input w3-border w3-margin-bottom" placeholder="Nom" required name="sujet">
+						<option selected label class="w3-text-gray">Choisir votre catégorie</option>
+						<option>Réclamation sur un article</option>
+						<option>Information sur un article</option>
+						<option>Paiement / Remboursement</option>
+						<option>Divers</option>
+					</select> 
+					<div class="w3-row-padding w3-margin-bottom" style="margin:0 -16px 8px -16px">
 						<div class="w3-half">
-							<input class="w3-input w3-border w3-hover-border-red" type="text" placeholder="Nom" required name="name">
+							<input class="w3-input w3-border" type="text" placeholder="Nom" required name="name">
 						</div>
 						<div class="w3-half">
-							<input class="w3-input w3-border w3-hover-border-red" type="email" placeholder="Email" required name="mail">
+							<input class="w3-input w3-border" type="email" placeholder="Email" required name="mail">
 						</div>
 					</div>
-					<textarea class="w3-input w3-border w3-hover-border-red" placeholder="Message" required name="message"></textarea>
+					<textarea class="w3-input w3-border" placeholder="Message" required name="message"></textarea>
 					<button class="txtGras w3-button w3-red w3-section w3-right w3-hover-red w3-hover-shadow" type="submit" name="formcontact"><i class="fa fa-paper-plane"></i> ENVOYER</button>
 				</form>
 			</div>
