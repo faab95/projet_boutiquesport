@@ -53,6 +53,11 @@
 	margin-bottom : 32px;
 }
 
+.marginTop-32
+{
+	margin-top : 32px;
+}
+
 textarea 
 {
     resize: none;

@@ -1,3 +1,7 @@
+<?php
+include ('./lib/php/liste_include.php');
+$db = Connexion::getInstance($dsn, $user, $pass);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -15,10 +19,22 @@
 
 	<body>
 		<!-- HEADER ---------------------------------------------------------------->
-		<div class="w3-padding w3-black"></div>
+		<div class="w3-black w3-container">
+			<div class="w3-right">
+				<div class="w3-dropdown-hover">
+					<button href="#description" class="w3-button w3-black w3-hover-black" style="background-color:#fafafa">Mon compte <i class="fa fa-caret-down"></i></button>
+					<div class="w3-dropdown-content w3-bar-block w3-card-4" style="background-color:#fafafa;">
+						<a href="index.php?page=pull" class="w3-bar-item w3-button"><i class="fa fa-sign-in"></i> Se connecter</a>
+						<a href="index.php?page=pull" class="w3-bar-item w3-button w3-hide"><i class="fa fa-user"></i> Mon compte</a>
+						<a href="index.php?page=pull" class="w3-bar-item w3-button w3-hide"><i class="fa fa-sign-out"></i> Déconnexion</a>
+					</div>
+				</div>
+				<a href="index.php?page=pull"><i class="fa fa-shopping-cart fa-lg"></i> </a>
+			</div>
+		</div>
 		<div class="w3-padding-16">
-			<h1 class="txtGras txtOmbre w3-center w3-hide-small"><a href="index.php?page=accueil" class="noDeco"><span style="color:red">BOUTIQUE</span>SPORT</a></h1>
-			<h2 class="txtGras txtOmbre w3-center w3-hide-medium w3-hide-large"><a href="index.php?page=accueil" class="noDeco"><span style="color:red">BOUTIQUE</span>SPORT</a></h2>
+			<h1 class="txtGras txtOmbre w3-center w3-hide-small w3-xxxlarge"><a href="index.php?page=accueil" class="noDeco"><span style="color:red">BOUTIQUE</span>SPORT</a></h1>
+			<h2 class="txtGras txtOmbre w3-center w3-hide-medium w3-hide-large w3-xxlarge"><a href="index.php?page=accueil" class="noDeco"><span style="color:red">BOUTIQUE</span>SPORT</a></h2>
 		</div>
 		<!-- Barre de navigation pour large screen -->
 		<div class="w3-container w3-padding-16 w3-center boxOmbre" style="background-color:#fafafa;">
@@ -83,7 +99,7 @@
 		
 		
 		<!-- FOOTER ---------------------------------------------------------------->
-		<div class="w3-row w3-center w3-padding-32 boxOmbre" style="background-image: url('images/footer.png')">
+		<div class="w3-row w3-center w3-padding-16 boxOmbre" style="background-image: url('images/footer.png')">
 			<h1 class="txtGras w3-padding-32 w3-xxxlarge w3-text-white"><a href="index.php?page=accueil" class="noDeco w3-topbar w3-bottombar"><span style="color:red">B</span>S</a></h1>
 			<div class="w3-small txtGras txtGray">
 				<p>© COPYRIGHT 2017 Fabian</p>

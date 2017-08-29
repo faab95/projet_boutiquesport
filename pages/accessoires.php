@@ -8,7 +8,6 @@
 	<!-- Articles -->
 	<div class="w3-row w3-grayscale w3-container">
 	<?php
-	$i;
 	for($i=0;$i<8;$i++)
 	{
 		?>
@@ -17,7 +16,9 @@
 				<div class="w3-display-container w3-hover-shadow">
 					<img src="images/sac.jpg" style="width:100%">
 					<div class="w3-display-middle w3-display-hover">
-						<button class="w3-button w3-black w3-hover-black">Ajouter au panier <i class="fa fa-shopping-cart"></i></button>
+						<form method="POST" action="index.php?page=cible">
+							<button class="w3-button w3-black w3-hover-black">Ajouter au panier <i class="fa fa-shopping-cart"></i></button>
+						<form>
 					</div>
 				</div>
 				<p>Sac à bandouillères<br><b>20.00€</b></p>

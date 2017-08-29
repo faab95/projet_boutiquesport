@@ -91,7 +91,7 @@ if(isset($_POST['formcontact']))
 <!-- Modal confirmation -->
 <div id="id01" class="w3-modal">
 	<div class="w3-modal-content w3-round-large">
-		<header class="w3-container w3-teal"> 
+		<header class="w3-container w3-black"> 
 			<span onclick="id01.style.display='none'" class="w3-closebtn">&times;</span>
 			<h6><i class="fa fa-check-circle"></i> Confirmation de l'envoi</h6>
 		</header>
@@ -104,7 +104,7 @@ if(isset($_POST['formcontact']))
 <!-- Modal échec -->
 <div id="id02" class="w3-modal">
 	<div class="w3-modal-content w3-round-large">
-		<header class="w3-container w3-teal"> 
+		<header class="w3-container w3-black"> 
 			<span onclick="id02.style.display='none'" class="w3-closebtn">&times;</span>
 			<h6><i class="fa fa-exclamation-triangle"></i> Echec de l'envoi</h6>
 		</header>
