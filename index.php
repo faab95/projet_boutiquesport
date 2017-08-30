@@ -3,9 +3,11 @@ session_start();
 //ini_set("display_errors",0);error_reporting(0);
 include ('./lib/php/liste_include.php');
 $db = Connexion::getInstance($dsn, $user, $pass);
-if(isset($_SESSION['id']))
+$admin = 'admin';
+echo md5($admin);
+if(isset($_SESSION['email']))
 {
-	print $_SESSION['id'];
+	print $_SESSION['email'];
 }
 else
 {
@@ -36,7 +38,7 @@ else
 					<button class="w3-button w3-black w3-hover-black" style="background-color:#fafafa">Mon compte <i class="fa fa-caret-down"></i></button>
 					<div class="w3-dropdown-content w3-bar-block w3-card-4" style="background-color:#fafafa;">
 						<a id="buttonCo" class="w3-bar-item w3-button" href="index.php?page=connexion" ><i class="fa fa-sign-in"></i> Se connecter</a>
-						<a id="buttonAccount" class="w3-bar-item w3-button w3-hide" href="index.php?page=account" ><i class="fa fa-user"></i> Mon compte</a>
+						<a id="buttonAccount" class="w3-bar-item w3-button" href="index.php?page=account" ><i class="fa fa-user"></i> Mon compte</a>
 						<a id="buttonDeco" class="w3-bar-item w3-button" href="index.php?page=deconnexion"><i class="fa fa-sign-out"></i> Déconnexion</a>
 					</div>
 				</div>

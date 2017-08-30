@@ -14,16 +14,16 @@ class ClientManager
 		$query = "INSERT INTO client(nom, prenom, rue, num, cp, ville, email, mdp) VALUES(:nom, :prenom, :rue, :num, :cp, :ville, :email, :mdp)";
 		try 
 		{
-            $statement = $this->_db->prepare($query);
-			$statement->bindValue(':nom', $cli->__get('nom'));
-			$statement->bindValue(':prenom', $cli->__get('prenom'));
-			$statement->bindValue(':rue', $cli->__get('rue'));
-			$statement->bindValue(':num', $cli->__get('num'));
-			$statement->bindValue(':cp', $cli->__get('cp'));
-			$statement->bindValue(':ville', $cli->__get('ville'));
-			$statement->bindValue(':email', $cli->__get('email'));
-			$statement->bindValue(':mdp', $cli->__get('mdp'));
-			$statement->execute();
+            $resultset = $this->_db->prepare($query);
+			$resultset->bindValue(1, $cli->__get('nom'));
+			$resultset->bindValue(2, $cli->__get('prenom'));
+			$resultset->bindValue(3, $cli->__get('rue'));
+			$resultset->bindValue(4, $cli->__get('num'));
+			$resultset->bindValue(5, $cli->__get('cp'));
+			$resultset->bindValue(6, $cli->__get('ville'));
+			$resultset->bindValue(7, $cli->__get('email'));
+			$resultset->bindValue(8, $cli->__get('mdp'));
+			$resultset->execute();
 			$verif = 1;
         } 
 		catch (PDOException $e) 
@@ -64,6 +64,53 @@ class ClientManager
             $client = null;
         }
 		return $client;
+    }
+	
+	public function getClientById($id_client) 
+	{
+		$client =  null;
+        try 
+		{
+            $query = "SELECT * FROM client WHERE id_client =:id_client";
+            $resultset = $this->_db->prepare($query);
+            $resultset->bindValue(1, $id_client);
+            $resultset->execute();
+			if($data = $resultset->fetch()) 
+			{
+				$client = new Client($data);
+			}
+        } 
+		catch (PDOException $e) 
+		{
+            $client = null;
+        }
+		return $client;
+    }
+	
+	public function update($cli) 
+	{
+		$verif;
+        try 
+		{
+            $query = "UPDATE client SET nom=:nom, prenom=:prenom, rue=:rue, num=:num, cp=:cp, ville=:ville, email=:email, mdp=:mdp WHERE id_client=:id_client";
+            $resultset = $this->_db->prepare($query);
+            $resultset->bindValue(1, $cli->__get('nom'));
+			$resultset->bindValue(2, $cli->__get('prenom'));
+			$resultset->bindValue(3, $cli->__get('rue'));
+			$resultset->bindValue(4, $cli->__get('num'));
+			$resultset->bindValue(5, $cli->__get('cp'));
+			$resultset->bindValue(6, $cli->__get('ville'));
+			$resultset->bindValue(7, $cli->__get('email'));
+			$resultset->bindValue(8, $cli->__get('mdp'));
+			$resultset->bindValue(9, $cli->__get('id_client'));
+            $resultset->execute();
+			$verif = $resultset->rowCount();
+        } 
+		catch (PDOException $e) 
+		{
+			$verif = 0;
+        }
+		return $verif;
     }
 }
 ?>

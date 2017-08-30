@@ -1,10 +1,20 @@
 <?php
+if(isset($_SESSION['article']))
+{
+	$test = $_SESSION['article'];
+	print $test->nom;
+}
+else
+{
+	print 'erreur';
+}
+
 if(isset($_POST['formpanier']))
 {
 	$cpt = $_SESSION['panier'];
 	$cpt++;
 	$_SESSION['panier'] = $cpt;
-	print "<meta http-equiv=\"refresh\": Content=\"0;URL=index.php?page=panier\">";
+	//print "<meta http-equiv=\"refresh\": Content=\"0;URL=index.php?page=panier\">";
 }
 ?>
 

@@ -1,0 +1,5 @@
+AuthUserFile C:/wamp64/www/boutiquesport/.htpasswd
+AuthGroupFile /dev/null
+AuthName "Page d'administration protégée"
+AuthType basic
+require valid-user

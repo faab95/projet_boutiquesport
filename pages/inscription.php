@@ -36,7 +36,6 @@ if(isset($_POST['forminscription']))
 		});
 		</script>
 		<?php
-		print "<meta http-equiv=\"refresh\": Content=\"0;URL=index.php?page=accueil\">";
 	}
 	else if($verif == -1)
 	{
