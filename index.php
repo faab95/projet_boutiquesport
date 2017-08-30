@@ -1,7 +1,18 @@
 <?php
+session_start();
+//ini_set("display_errors",0);error_reporting(0);
 include ('./lib/php/liste_include.php');
 $db = Connexion::getInstance($dsn, $user, $pass);
+if(isset($_SESSION['id']))
+{
+	print $_SESSION['id'];
+}
+else
+{
+	print 'pas co';
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -22,14 +33,14 @@ $db = Connexion::getInstance($dsn, $user, $pass);
 		<div class="w3-black w3-container">
 			<div class="w3-right">
 				<div class="w3-dropdown-hover">
-					<button href="#description" class="w3-button w3-black w3-hover-black" style="background-color:#fafafa">Mon compte <i class="fa fa-caret-down"></i></button>
+					<button class="w3-button w3-black w3-hover-black" style="background-color:#fafafa">Mon compte <i class="fa fa-caret-down"></i></button>
 					<div class="w3-dropdown-content w3-bar-block w3-card-4" style="background-color:#fafafa;">
-						<a href="index.php?page=pull" class="w3-bar-item w3-button"><i class="fa fa-sign-in"></i> Se connecter</a>
-						<a href="index.php?page=pull" class="w3-bar-item w3-button w3-hide"><i class="fa fa-user"></i> Mon compte</a>
-						<a href="index.php?page=pull" class="w3-bar-item w3-button w3-hide"><i class="fa fa-sign-out"></i> Déconnexion</a>
+						<a id="buttonCo" class="w3-bar-item w3-button" href="index.php?page=connexion" ><i class="fa fa-sign-in"></i> Se connecter</a>
+						<a id="buttonAccount" class="w3-bar-item w3-button w3-hide" href="index.php?page=account" ><i class="fa fa-user"></i> Mon compte</a>
+						<a id="buttonDeco" class="w3-bar-item w3-button" href="index.php?page=deconnexion"><i class="fa fa-sign-out"></i> Déconnexion</a>
 					</div>
 				</div>
-				<a href="index.php?page=pull"><i class="fa fa-shopping-cart fa-lg"></i> </a>
+				<a href="index.php?page=panier"><i class="fa fa-shopping-cart fa-lg"></i><span class="w3-badge w3-red w3-small"><?php if(isset($_SESSION['panier'])){print $_SESSION['panier'];}else{print 0;} ?></span> </a>
 			</div>
 		</div>
 		<div class="w3-padding-16">
@@ -40,7 +51,7 @@ $db = Connexion::getInstance($dsn, $user, $pass);
 		<div class="w3-container w3-padding-16 w3-center boxOmbre" style="background-color:#fafafa;">
 			<a class="w3-hide-medium w3-hide-large w3-opennav w3-center w3-transparent w3-hover-text-red" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars fa-lg"></i></a>
 			<div class="w3-dropdown-hover w3-hide-small">
-				<button href="#description" class="txtGras w3-button w3-hover-shadow w3-round-large" style="background-color:#fafafa">HOMMES <i class="fa fa-caret-down"></i></button>
+				<button class="txtGras w3-button w3-hover-shadow w3-round-large" style="background-color:#fafafa">HOMMES <i class="fa fa-caret-down"></i></button>
 				<div class="w3-dropdown-content w3-bar-block w3-card-4" style="background-color:#fafafa;">
 					<a href="index.php?page=pull" class="w3-bar-item w3-button">Pull</a>
 					<a href="index.php?page=tshirt" class="w3-bar-item w3-button">T-shirt</a>
@@ -99,123 +110,28 @@ $db = Connexion::getInstance($dsn, $user, $pass);
 		
 		
 		<!-- FOOTER ---------------------------------------------------------------->
-		<div class="w3-row w3-center w3-padding-16 boxOmbre" style="background-image: url('images/footer.png')">
-			<h1 class="txtGras w3-padding-32 w3-xxxlarge w3-text-white"><a href="index.php?page=accueil" class="noDeco w3-topbar w3-bottombar"><span style="color:red">B</span>S</a></h1>
-			<div class="w3-small txtGras txtGray">
-				<p>© COPYRIGHT 2017 Fabian</p>
-				<p>Tous droits réservés</p>
-			</div>
-			<div class="w3-large w3-padding-16 txtGray">
-				<a href="https://fr-fr.facebook.com/" target="_blank"><i class="fa fa-facebook-official w3-hover-text-indigo"></i></a>
-				<a href="https://www.instagram.com/?hl=fr" target="_blank"><i class="fa fa-instagram w3-hover-text-purple"></i></a>
-				<a href="https://www.snapchat.com/l/fr-fr/" target="_blank"><i class="fa fa-snapchat w3-hover-text-yellow"></i></a>
-				<a href="https://twitter.com/?lang=fr" target="_blank"><i class="fa fa-twitter w3-hover-text-light-blue"></i></a>
-			</div>
-			<div class="w3-right">
-				<button id="topButton" title="Vers le haut" onclick="topFunction()"><i class="fa fa-chevron-circle-up w3-hover-opacity"></i></button>
-			</div>
+		<div class="w3-row-padding w3-center w3-padding-16 boxOmbre" style="background-image: url('images/footer.png')">
+				<h1 class="txtGras w3-padding-32 w3-xxxlarge w3-text-white"><a href="index.php?page=accueil" class="noDeco w3-topbar w3-bottombar"><span style="color:red">B</span>S</a></h1>
+				<div class="w3-small txtGras txtGray">
+					<p>© COPYRIGHT 2017 Fabian</p>
+					<p>Tous droits réservés</p>
+				</div>
+				<div class="w3-large w3-padding-16 txtGray">
+					<a href="https://fr-fr.facebook.com/" target="_blank"><i class="fa fa-facebook-official w3-hover-text-indigo"></i></a>
+					<a href="https://www.instagram.com/?hl=fr" target="_blank"><i class="fa fa-instagram w3-hover-text-purple"></i></a>
+					<a href="https://www.snapchat.com/l/fr-fr/" target="_blank"><i class="fa fa-snapchat w3-hover-text-yellow"></i></a>
+					<a href="https://twitter.com/?lang=fr" target="_blank"><i class="fa fa-twitter w3-hover-text-light-blue"></i></a>
+				</div>
+				<div class="w3-right">
+					<button id="topButton" title="Vers le haut" onclick="topFunction()"><i class="fa fa-chevron-circle-up w3-hover-opacity"></i></button>
+				</div>
 		</div>
 		<!-------------------------------------------------------------------------->
 		
+		<script src="lib/js/function_carousel" type="text/javascript"></script>
+		<script src="lib/js/function_accordion" type="text/javascript"></script>
+		<script src="lib/js/function_open" type="text/javascript"></script>
+		<script src="lib/js/function_scroll" type="text/javascript"></script>
 		
 	</body>
-	<script>
-var slideIndex = 1;
-showDivs(slideIndex);
-
-var myIndex = 0;
-carousel();
-
-function carousel() 
-{
-	var i;
-	var x = document.getElementsByClassName("mySlides");
-	var dots = document.getElementsByClassName("slides");
-	for (i = 0; i < x.length; i++) 
-	{
-		x[i].style.display = "none";  
-	}
-	myIndex++;
-	if (myIndex > x.length) 
-	{
-		myIndex = 1
-	}    
-	x[myIndex-1].style.display = "block";
-	for (i = 0; i < dots.length; i++) 
-	{
-		dots[i].className = dots[i].className.replace(" w3-white", "");
-	}
-	dots[myIndex-1].className += " w3-white";
-	setTimeout(carousel, 4000);    
-}
-
-function currentDiv(n) {
-  showDivs(slideIndex = n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("slides");
-  if (n > x.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = x.length}
-  
-  for (i = 0; i < x.length; i++) 
-  {
-     x[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) 
-  {
-     dots[i].className = dots[i].className.replace(" w3-white", "");
-  }
-  x[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " w3-white";
-}
-
-// Accordion 
-function fct_accordion() {
-    var x = document.getElementById("demoAcc");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else {
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-
-// Click on the "Jeans" link on page load to open the accordion for demo purposes
-document.getElementById("myBtn").click();
-
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-}
- 
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-}
-
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() 
-{
-	scrollFunction()
-};
-
-function scrollFunction() 
-{
-    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) 
-	{
-        document.getElementById("topButton").style.display = "block";
-    } 
-	else 
-	{
-        document.getElementById("topButton").style.display = "none";
-    }
-}
-
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-    document.body.scrollTop = 0; // For Chrome, Safari and Opera 
-    document.documentElement.scrollTop = 0; // For IE and Firefox
-}
-</script>
-
 </html>

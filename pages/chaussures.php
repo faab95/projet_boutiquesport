@@ -1,39 +1,39 @@
 <?php
-if(isset($_POST['formtest']))
-{
-	$_nom = 'Collier';
-	$_prenom = 'Fabian';
-	$_rue = 'Rue Achille Delattre';
-	$_num = '408';
-	$_cp = '7390';
-	$_ville = 'Quaregnon';
-	$_mail = 'david@hotmail.com';
-	$_mdp = 'mymdp';
-	
-	$client = new Client
-	([
-		'nom' => $_nom,
-		'prenom' => $_prenom,
-		'rue' => $_rue,
-		'num' => $_num,
-		'cp' => $_cp,
-		'ville' => $_ville,
-		'mail' => $_mail,
-		'mdp' => $_mdp
-	]);
-	
-	$manager = new ClientManager($db);
-	$cli = $manager->getClient(2);
-	print $cli[0]->prenom;
-	
-	//$manager->add($client);
-}
+$id_type = 7;
+$manager = new ArticleManager($db);
+$article = $manager->getAllArticles($id_type);
+$nbr = count($article);
 ?>
 
 <div class="w3-padding-64">
-	<div class="w3-content w3-container w3-center">
-		<form method="POST">
-			<button class="txtGras w3-button w3-red w3-hover-red w3-hover-shadow" type="submit" name="formtest">TEST</button>
-		</form>
+	<!-- Barre de tri -->
+	<div class="w3-content w3-container w3-round-large w3-padding-16 w3-red" style="margin-bottom:32px;">
+		
 	</div>
+	<!------------------------------------- -->
+	
+	<!-- Articles -->
+	<div class="w3-row w3-container">
+	<?php
+	for($i=0;$i<$nbr;$i++)
+	{
+		?>
+		<div class="w3-quarter">
+			<div class="w3-container w3-center">
+				<div class="w3-display-container">
+					<img class="w3-hover-shadow" src="images/chaussures/<?php echo $article[$i]->image?>" style="width:80%">
+					<div class="w3-display-middle w3-display-hover">
+						<form method="POST" action="index.php?page=cible">
+							<button class="w3-button w3-black w3-hover-black">Ajouter au panier <i class="fa fa-shopping-cart"></i></button>
+						<form>
+					</div>
+				</div>
+					<p><?php echo $article[$i]->nom?><br><b><?php echo $article[$i]->prix?>€</b></p>
+			</div>
+		</div>
+		<?php
+	}
+	?>
+	</div>
+	<!------------------------------------- -->
 </div>

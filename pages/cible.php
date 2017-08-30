@@ -1,7 +1,17 @@
+<?php
+if(isset($_POST['formpanier']))
+{
+	$cpt = $_SESSION['panier'];
+	$cpt++;
+	$_SESSION['panier'] = $cpt;
+	print "<meta http-equiv=\"refresh\": Content=\"0;URL=index.php?page=panier\">";
+}
+?>
+
 <div class="w3-padding-64">
 	<div class="w3-container w3-content w3-center">
 		<div class="w3-half w3-container">
-			<img src="images/sac.jpg" style="width:100%">
+			<img src="images/accessoires/sac.jpg" style="width:100%">
 		</div>
 		<div class="w3-half w3-left-align w3-container">
 			<div class="w3-section">
@@ -19,7 +29,9 @@
 					<option>XL</option>
 				</select> 
 			</div>
-			<button class="txtGras w3-button w3-input w3-red w3-section w3-hover-red w3-hover-shadow" type="submit" name="formcontact"><i class="fa fa-shopping-cart"></i> AJOUTER AU PANIER</button>
+			<form method="POST">
+				<button class="txtGras w3-button w3-input w3-red w3-section w3-hover-red w3-hover-shadow" type="submit" name="formpanier"><i class="fa fa-shopping-cart"></i> AJOUTER AU PANIER</button>
+			</form>
 		</div>
 	</div>
 </div>

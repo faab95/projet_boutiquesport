@@ -10,7 +10,8 @@ class ClientManager
 
 	public function add(Client $cli)
 	{
-		$query = "INSERT INTO client(nom, prenom, rue, num, cp, ville, mail, mdp) VALUES(:nom, :prenom, :rue, :num, :cp, :ville, :mail, :mdp)";
+		$verif;
+		$query = "INSERT INTO client(nom, prenom, rue, num, cp, ville, email, mdp) VALUES(:nom, :prenom, :rue, :num, :cp, :ville, :email, :mdp)";
 		try 
 		{
             $statement = $this->_db->prepare($query);
@@ -20,59 +21,49 @@ class ClientManager
 			$statement->bindValue(':num', $cli->__get('num'));
 			$statement->bindValue(':cp', $cli->__get('cp'));
 			$statement->bindValue(':ville', $cli->__get('ville'));
-			$statement->bindValue(':mail', $cli->__get('mail'));
+			$statement->bindValue(':email', $cli->__get('email'));
 			$statement->bindValue(':mdp', $cli->__get('mdp'));
 			$statement->execute();
-			print "Insertion réussie CLASHEUR";
+			$verif = 1;
         } 
 		catch (PDOException $e) 
 		{
-            print "Echec de l'insertion : " . $e;
-        }
+			$query = "SELECT * FROM client WHERE email =:email";
+            $resultset = $this->_db->prepare($query);
+            $resultset->bindValue(1, $cli->__get('email'));
+            $resultset->execute();
+			if($resultset->fetch())
+			{
+				$verif = -1;
+			}
+			else
+			{
+				$verif = 0;
+			}
+		}
+		return $verif;
 	}
 	
-	public function getClient($id) 
+	public function getClient($email, $mdp) 
 	{
-		$_typeArray = array();
+		$client =  null;
         try 
 		{
-            $query = "SELECT * FROM client WHERE id_client =:id_client as _typeArray";
+            $query = "SELECT * FROM client WHERE email =:email AND mdp =:mdp";
             $resultset = $this->_db->prepare($query);
-            $resultset->bindValue(1, $id, PDO::PARAM_INT);
+            $resultset->bindValue(1, $email);
+			$resultset->bindValue(2, $mdp);
             $resultset->execute();
-            $data = $resultset->fetchAll();
-            $resultset->execute();
+			if($data = $resultset->fetch()) 
+			{
+				$client = new Client($data);
+			}
         } 
 		catch (PDOException $e) 
 		{
-            print $e->getMessage();
+            $client = null;
         }
-
-        while ($data = $resultset->fetch()) 
-		{
-            try 
-			{
-                $_typeArray[] = new Client($data);
-            } 
-			catch (PDOException $e) 
-			{
-                print $e->getMessage();
-            }
-        }
-        return $_typeArray;
+		return $client;
     }
-
-	/*
-	public function getListClient()
-	{
-		$persos = [];
-		$q = $this->_db->query('SELECT id, nom, forcePerso, degats, niveau, experience FROM personnages ORDER BY nom');
-		while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-		{
-			$persos[] = new Personnage($donnees);
-		}
-		return $persos;
-	}
-	*/
 }
 ?>
