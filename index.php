@@ -1,18 +1,8 @@
 <?php
 session_start();
-//ini_set("display_errors",0);error_reporting(0);
+ini_set("display_errors",0);error_reporting(0);
 include ('./lib/php/liste_include.php');
 $db = Connexion::getInstance($dsn, $user, $pass);
-$admin = 'admin';
-echo md5($admin);
-if(isset($_SESSION['email']))
-{
-	print $_SESSION['email'];
-}
-else
-{
-	print 'pas co';
-}
 ?>
 
 <!DOCTYPE html>
@@ -106,6 +96,16 @@ else
 		if (file_exists($chemin)) 
 		{
 			include ($chemin);
+		}
+		else 
+		{
+			?>
+			<div class="w3-padding-32">
+				<div class="w3-container w3-content w3-center">
+					<span class="txtGras w3-text-red  w3-xlarge">Oups.. La page demandée n'existe pas !</span>
+				</div>
+			</div>
+			<?php
 		}
 		?>               
 		<!-------------------------------------------------------------------------->

@@ -1,19 +1,5 @@
 <div class="w3-padding-64">
-	<div class="w3-container w3-content w3-center">
-	<?php
-	for($i=0;$i<$_SESSION['panier'];$i++)
-	{
-		?>
-		<div class="w3-container w3-row">
-		<div class="w3-half w3-container">
-			<img src="images/accessoires/sac.jpg" style="width:60%">
-		</div>
-		<div class="w3-half w3-container">
-			<img src="images/accessoires/sac.jpg" style="width:60%">
-		</div>
-		</div>
-		<?php
-	}
-	?>
+	<div class="w3-container w3-center">
+		<span class="txtGras w3-text-red  w3-xlarge">Il y a <?php if(isset($_SESSION['panier'])){print $_SESSION['panier'];}else{print 0;} ?> article(s) dans le panier mais... Cette page est en contruction !</span>
 	</div>
 </div>

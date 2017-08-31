@@ -3,27 +3,18 @@ $id_type = 8;
 $manager = new ArticleManager($db);
 $article = $manager->getAllArticles($id_type);
 $nbr = count($article);
-
-if(isset($_POST['formcible']))
-{
-	$id = $_POST['id'];
-	$id_article = $article[$id]->id_article;
-	//$art = $manager->getArticle($id_article);
-}
 ?>
 
 <div class="w3-padding-64">
 	<!-- Barre de tri -->
-	<div class="w3-content w3-container w3-padding w3-round-small w3-dark-gray" style="margin-bottom:32px;">
-		<div class="w3-container-display w3-row">
-			<span class="w3-display-left">Il y a <?php print $nbr; ?> articles.</span>
-			<div class="w3-display-right">
-				<select class="w3-input w3-border" placeholder="Nom" required name="sujet">
-					<option>Nom</option>
-					<option>Prix décroissant</option>
-					<option>Prix croissant</option>
-				</select> 
-			</div>
+	<div class="w3-content w3-container w3-padding w3-round-small w3-dark-gray w3-text-shadow" style="margin-bottom:32px;">
+		<div class="w3-cell-row">
+			<span class="w3-cell">Trier par : </span>
+			<select class="w3-input w3-cell" style="border:none;">
+				<option>Nom</option>
+				<option>Prix décroissant</option>
+				<option>Prix croissant</option>
+			</select>
 		</div>
 	</div>
 	<!------------------------------------- -->
@@ -44,7 +35,8 @@ if(isset($_POST['formcible']))
 						</div>
 					</div>
 					<p><?php echo $article[$i]->nom?><br/><span class="txtGras"><?php echo $article[$i]->prix?>€</span></p>
-					<input style="display:none;"value="<?php print $i ;?>" name="id"/>
+					<input style="display:none;" value="<?php print $article[$i]->id_article ;?>" name="id_article"/>
+					<input style="display:none;" value="8" name="id_type"/>
 				</form>
 			</div>
 		</div>

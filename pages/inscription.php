@@ -127,7 +127,7 @@ if(isset($_POST['forminscription']))
 <div id="id01" class="w3-modal">
 	<div class="w3-modal-content w3-round-large">
 		<header class="w3-container w3-black"> 
-			<span onclick="id01.style.display='none'" class="w3-closebtn w3-hover-text-red">&times;</span>
+			<span onclick="window.location.href='index.php?page=accueil'" class="w3-closebtn w3-hover-text-red">&times;</span>
 			<h6><i class="fa fa-check-circle"></i> Confirmation de l'inscription</h6>
 		</header>
 		<div class="w3-container">

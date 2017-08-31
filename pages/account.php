@@ -43,11 +43,39 @@ if(isset($_POST['formaccount']))
 		
 		$manager = new ClientManager($db);
 		$verif = $manager->update($client);
-		print $verif;
+		if($verif=1)
+		{
+			?>
+			<script type="text/javascript">
+			$( document ).ready(function() 
+			{
+			document.getElementById("id03").style.display = "block";
+			});
+			</script>	
+			<?php
+		}
+		else
+		{
+			?>
+			<script type="text/javascript">
+			$( document ).ready(function() 
+			{
+			document.getElementById("id02").style.display = "block";
+			});
+			</script>	
+			<?php
+		}
 	}
 	else
 	{
-		print 'mauvais mdp !';
+		?>
+		<script type="text/javascript">
+		$( document ).ready(function() 
+		{
+		document.getElementById("id01").style.display = "block";
+		});
+		</script>	
+		<?php
 	}	
 }
 ?>
@@ -115,3 +143,45 @@ if(isset($_POST['formaccount']))
 		</div>
 	</div>
 </div>
+
+<!-- Modal échec mauvais password -->
+<div id="id01" class="w3-modal">
+	<div class="w3-modal-content w3-round-large">
+		<header class="w3-container w3-black"> 
+			<span onclick="id01.style.display='none'" class="w3-closebtn w3-hover-text-red">&times;</span>
+			<h6><i class="fa fa-check-circle"></i> Echec d'authentification</h6>
+		</header>
+		<div class="w3-container">
+			<p>Ce mot de passe est incorrect.<br/>Réessayez s'il vous plait.</p>
+		</div>
+	</div>
+</div>
+<!------------------------------------- -->
+
+<!-- Modal échec-->
+<div id="id02" class="w3-modal">
+	<div class="w3-modal-content w3-round-large">
+		<header class="w3-container w3-black"> 
+			<span onclick="id03.style.display='none'" class="w3-closebtn w3-hover-text-red">&times;</span>
+			<h6><i class="fa fa-exclamation-triangle"></i> Echec de la mise à jour</h6>
+		</header>
+		<div class="w3-container">
+			<p>Votre modifications n'ont pas pu être enregistrées.<br/>Notre équipe s'occupe de ce problème, merci de votre patiente.</p>
+		</div>
+	</div>
+</div>
+<!------------------------------------- -->
+
+<!-- Modal réussite-->
+<div id="id03" class="w3-modal">
+	<div class="w3-modal-content w3-round-large">
+		<header class="w3-container w3-black"> 
+			<span onclick="window.location.href='index.php?page=accueil'" class="w3-closebtn w3-hover-text-red">&times;</span>
+			<h6><i class="fa fa-exclamation-triangle"></i> Mise à jour effectuée</h6>
+		</header>
+		<div class="w3-container">
+			<p>La mise à jour a été effectuée avec succès.</p>
+		</div>
+	</div>
+</div>
+<!------------------------------------- -->
